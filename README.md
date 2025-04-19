@@ -2,7 +2,7 @@
 
 A modern interactive avatar application built with D-ID's Agents SDK. This application allows users to interact with a digital human through text chat and speech recognition.
 
-![Interactive Chat Avatar](./@AI_Logo.png)
+![Interactive Chat Avatar](./AI_Logo.png)
 
 ## Features
 
