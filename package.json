@@ -1,0 +1,33 @@
+{
+  "name": "ai-by-dna-avatar",
+  "version": "1.0.0",
+  "description": "AI by DNA Avatar",
+  "main": "main.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview --host 0.0.0.0 --port ${PORT:-3000}",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/de-id/agents-sdk-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/de-id/agents-sdk-demo/issues"
+  },
+  "homepage": "https://github.com/de-id/agents-sdk-demo#readme",
+  "dependencies": {
+    "@d-id/client-sdk": "^1.1.0-beta.2",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "vite": "^6.2.6"
+  }
+}

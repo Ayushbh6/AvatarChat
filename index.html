@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/AI-by-DNA_Logo-BbzOQnT6.png?v=2">
+  <link rel="shortcut icon" type="image/png" href="/assets/AI-by-DNA_Logo-BbzOQnT6.png?v=2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <title>AI by DNA Avatar</title>
+</head>
+
+<body>
+  <div id="container">
+    <!-- Top buttons -->
+    <div class="top-controls">
+      <button id="refreshButton" class="corner-button top-left" title="Refresh and clear chat">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+      <div class="header-center">
+        <span id="previewName">Angeliki</span>
+        <span id="connectionLabel">Connecting..</span>
+      </div>
+      <button id="volumeButton" class="corner-button top-right" title="Toggle volume">
+        <span class="material-symbols-outlined">volume_up</span>
+      </button>
+    </div>
+
+    <!-- Main video area -->
+    <div class="video-container">
+      <video id="videoElement" autoplay muted playsinline loop></video>
+    </div>
+    
+    <!-- Bottom controls -->
+    <div class="bottom-controls">
+      <button id="speechButton" class="corner-button bottom-left" title="Speech to Text">
+        <span class="material-symbols-outlined">mic</span>
+      </button>
+      
+      <!-- Voice visualization -->
+      <div id="voiceVisualization">
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <button id="cancelSpeechButton" class="cancel-speech" title="Cancel speech input">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      
+      <button id="chatButton" class="corner-button bottom-right" title="Text chat">
+        <span class="material-symbols-outlined">chat</span>
+      </button>
+    </div>
+
+    <!-- Text input area (hidden by default, shown when chat is active) -->
+    <div class="inputsDiv">
+      <textarea id="textArea" placeholder="Type a message" autofocus></textarea>
+      <button id="speakButton" title="Send message">
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </div>
+
+    <!-- Chat messages container with collapse button -->
+    <div class="chat-container">
+      <!-- Chat messages -->
+      <div id="answers">
+        <div id="chatContent">
+          <!-- Messages will be added dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Collapse button (Moved Here) -->
+    <button id="collapseButton" class="collapse-btn" title="Toggle chat history">
+      <span class="material-symbols-outlined">chevron_left</span> <!-- Start with left chevron as container starts hidden -->
+    </button>
+
+  </div>
+  
+  <!-- Hidden reconnect section -->
+  <div id="hidden" style="display: none;">
+    <h2 id="hidden_h2"></h2>
+    <button id="reconnectButton"
+      title="agentManager.reconnect() -> Reconnects the previous WebRTC session">Reconnect</button>
+  </div>
+  
+  <!-- Script tag moved to here -->
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

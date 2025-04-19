@@ -1,0 +1,514 @@
+body, * {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    background-color: #ffffff;
+    height: 100vh;
+    width: 100vw;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+#container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: none;
+}
+
+/* Top controls */
+.top-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    width: 100%;
+    background-color: transparent;
+    z-index: 10;
+    border-bottom: none;
+}
+
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(180, 180, 180, 0.8);
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+#previewName {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+#connectionLabel {
+    font-size: 12px;
+    color: #eee;
+}
+
+.corner-button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(180, 180, 180, 0.8);
+    color: #fff;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative; /* Add positioning context */
+}
+
+/* Position buttons properly to prevent overlap */
+.corner-button.top-right, 
+.corner-button.bottom-right {
+    margin-right: 15px; /* Add space from the right edge */
+}
+
+/* Add padding to ensure buttons don't touch screen edges */
+.corner-button.bottom-left,
+.corner-button.bottom-right {
+    margin-bottom: 5px; /* Ensure bottom buttons don't touch the edge */
+}
+
+.corner-button:hover {
+    background-color: rgba(150, 150, 150, 0.9);
+}
+
+/* Video container */
+.video-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #ffffff;
+    height: calc(100vh - 60px);
+    padding: 0 150px;
+}
+
+#videoElement {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+}
+
+/* Bottom controls */
+.bottom-controls {
+    position: absolute;
+    bottom: 30px; /* Increased from 20px to move buttons higher */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 10;
+    align-items: center; /* Ensure buttons are vertically aligned */
+}
+
+/* Style for when chat is ACTIVE - adjust right side buttons */
+.chat-container.active ~ .bottom-controls .corner-button.bottom-right {
+    right: 350px; /* Move button away from chat panel when open */
+}
+
+/* Voice visualization */
+#voiceVisualization {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(120, 120, 120, 0.9);
+    border-radius: 30px;
+    padding: 15px 25px;
+    display: none;
+    align-items: center;
+    gap: 4px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+#voiceVisualization.active {
+    display: flex !important;
+}
+
+.voice-bar {
+    width: 3px;
+    height: 20px;
+    background-color: #FFFFFF;
+    margin: 0 2px;
+    border-radius: 4px;
+    transform-origin: bottom;
+    transition: transform 0.1s ease-out;
+}
+
+.voice-bar.speaking {
+    /* No animation here - we'll control height directly */
+    transform-origin: bottom;
+}
+
+@keyframes pulse {
+    0% { transform: scaleY(0.2); }
+    50% { transform: scaleY(1); }
+    100% { transform: scaleY(0.2); }
+}
+
+.cancel-speech {
+    margin-left: 15px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    padding: 0;
+    z-index: 10000;
+}
+
+.cancel-speech:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.cancel-speech .material-symbols-outlined {
+    font-size: 18px;
+    color: white;
+}
+
+/* Text input area */
+.inputsDiv {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 8px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    display: none;
+}
+
+.inputsDiv.active {
+    display: flex;
+}
+
+#textArea {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    resize: none;
+    height: 36px;
+    max-height: 80px;
+    padding: 8px 0;
+    background: transparent;
+}
+
+#speakButton {
+    background-color: transparent;
+    color: #666;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: 8px;
+}
+
+/* Chat container */
+.chat-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background-color: #fafafa;
+    border-left: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(320px); /* Start hidden */
+    transition: transform 0.3s ease, right 0.3s ease; /* Add transition for right property */
+    z-index: 30;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.chat-container.active {
+    transform: translateX(0); /* Slide in when active */
+}
+
+#answers {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    padding-top: 50px;
+    height: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Hidden section */
+#hidden {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#hidden_h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+#reconnectButton {
+    padding: 10px 20px;
+    background-color: rgba(120, 120, 120, 0.9);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 100%;
+        transform: translateX(100%); /* Hide full width */
+    }
+    
+    .chat-container.active {
+        transform: translateX(0); /* Slide in full width */
+    }
+    
+    .inputsDiv {
+        width: 90%;
+    }
+    
+    .collapse-btn {
+        /* Default (hidden) */
+        right: 5px; 
+        left: auto;
+        width: 34px; /* Smaller size for mobile */
+        height: 34px;
+        border-radius: 50%; 
+        border: none; /* Match corner buttons */
+        background-color: rgba(230, 230, 230, 0.8); /* Match corner buttons */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); /* Match corner buttons */
+    }
+
+    /* Active state for mobile */
+    .collapse-btn.chat-active-button {
+       right: auto; 
+       left: 5px; 
+       /* Size and style remain the same */
+    }
+}
+
+/* Message styles */
+.message {
+    margin-bottom: 16px;
+    max-width: 100%;
+}
+
+.message-time {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.message-content {
+    padding: 10px 14px;
+    border-radius: 18px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.message.user .message-content {
+    background-color: #f1f0f0;
+    color: #333;
+    margin-right: 20px;
+}
+
+.message.assistant .message-content {
+    background-color: rgba(120, 120, 120, 0.9);
+    color: white;
+    margin-left: 0;
+    border-radius: 18px;
+    max-width: 220px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.message-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.message-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+/* Style the display of the agent's name in messages */
+.message-time [role="assistant"] {
+    color: #666;
+    font-weight: 500;
+}
+
+/* Style the agent badge in the top left */
+.agent-badge {
+    position: absolute;
+    top: 80px;
+    left: 74px;
+    background-color: rgba(240, 240, 240, 0.8);
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.agent-badge span:first-child {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.agent-badge span:last-child {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: -2px;
+}
+
+/* Add chat header */
+.chat-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #f5f5f5;
+    z-index: 1;
+}
+
+.chat-header-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.chat-header-label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Arrow button */
+.material-symbols-outlined {
+    font-size: 20px;
+}
+
+/* Right arrow styles */
+.material-symbols-outlined.rightArrow {
+    font-size: 20px;
+}
+
+/* Arrow button right side */
+.rightArrow {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+/* Collapse button styles */
+.collapse-btn {
+    position: fixed; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 31; 
+    width: 38px; /* Match corner buttons */
+    height: 38px; /* Match corner buttons */
+    background-color: rgba(180, 180, 180, 0.8); /* Match corner buttons */
+    border: none; /* Remove border */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); /* Match corner buttons */
+    transition: background-color 0.2s, left 0.3s ease, right 0.3s ease; 
+    color: #fff;
+
+    /* Default state (chat hidden) */
+    right: 10px; /* Adjusted offset for circular shape */
+    left: auto;
+}
+
+/* Style for when chat is ACTIVE */
+.collapse-btn.chat-active-button {
+    right: 340px; /* Adjusted offset: 320px chat width + 20px gap */
+    left: auto;
+}
+
+.collapse-btn:hover {
+    background-color: rgba(150, 150, 150, 0.9); /* Match corner buttons hover */
+}
+
+.collapse-btn .material-symbols-outlined {
+    color: #fff; /* Match corner buttons */
+    font-size: 24px; /* Match corner buttons */
+}
