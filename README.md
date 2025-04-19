@@ -1,8 +1,8 @@
-# AI by DNA Avatar
+# Interactive Chat Avatar
 
 A modern interactive avatar application built with D-ID's Agents SDK. This application allows users to interact with a digital human through text chat and speech recognition.
 
-![AI by DNA Avatar](./AI-by-DNA_Logo.png)
+![Interactive Chat Avatar](./@AI_Logo.png)
 
 ## Features
 
@@ -24,7 +24,7 @@ A modern interactive avatar application built with D-ID's Agents SDK. This appli
 
 ```bash
 git clone <repository-url>
-cd ai-by-dna-avatar
+cd interactive-chat-avatar
 ```
 
 ### 2. Install dependencies

@@ -1,7 +1,7 @@
 {
-  "name": "ai-by-dna-avatar",
+  "name": "interactive-chat-avatar",
   "version": "1.0.0",
-  "description": "AI by DNA Avatar",
+  "description": "Interactive Chat Avatar",
   "main": "main.js",
   "engines": {
     "node": ">=18.0.0"
