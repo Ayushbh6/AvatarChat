@@ -9,7 +9,7 @@ import './webSpeechAPI.js'
 let agentId = "agt_aD2k-ztV"
 
 // 3. Paste the 'data-client-key' in the 'auth.clientKey' variable
-let auth = { type: 'key', clientKey: "YXV0aDB8Njc4MmEyNjg2YzFjNTM0MGZhNzNiZTkxOlNjaHJaS08weUQ4SjI5U3RtLU80NA==" };
+let auth = { type: 'key', clientKey: "" };
 
 // HTML Variables declaration
 let videoElement = document.querySelector("#videoElement")
