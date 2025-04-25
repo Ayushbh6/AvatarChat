@@ -6,7 +6,7 @@ import * as sdk from "@d-id/client-sdk"
 import './webSpeechAPI.js'
 
 // 2. Paste the `data-agent-id' in the 'agentId' variable
-let agentId = "agt_aD2k-ztV"
+let agentId = ""
 
 // 3. Paste the 'data-client-key' in the 'auth.clientKey' variable
 let auth = { type: 'key', clientKey: "" };
